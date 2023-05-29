@@ -1,0 +1,142 @@
+# queries.graphql
+
+# Get all users
+query GetUsers {
+  users {
+    id
+    name
+    email
+    age
+    orders {
+      id
+      name
+      price
+    }
+  }
+}
+
+# Get a single user by ID
+query GetUserById($userId: String!) {
+  user(id: $userId) {
+    id
+    name
+    email
+    age
+    orders {
+      id
+      name
+      price
+    }
+  }
+}
+
+# Create a new user
+mutation CreateUser($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+    name
+    email
+    age
+  }
+}
+
+# Include CreateUserInput variable like :
+{
+  "input": {
+    "name": "Sam",
+    "age": 25,
+    "email": "samuel@gmail.com"
+  }
+}
+
+# Update a user
+mutation UpdateUser($input: UpdateUserInput!) {
+  updateUser(input: $input) {
+    id
+    name
+    email
+    age
+  }
+}
+# Include UpdateUserInput variable like :
+{
+  "input": {
+    "id": "WORKING_ID_THAT_WAS_CREATED_BEFORE",
+    "name": "Sam",
+    "age": 25,
+    "email": "samuel@gmail.com"
+  }
+}
+
+# Delete a user
+
+
+mutation DeleteUser($userId: String!) {
+  deleteUser(id: $userId) {
+    id
+    name
+    email
+    age
+  }
+}
+
+mutation CreateUserWithProducts($input: CreateUserInput!) {
+  createUser(input: $input) {
+    id
+    name
+    email
+    age
+    orders {
+      id
+      name
+      price
+    }
+  }
+}
+
+# Queries
+query GetAllProducts {
+  products {
+    id
+    name
+    price
+  }
+}
+
+query GetProductById {
+  product(id: "product-1") {
+    id
+    name
+    price
+  }
+}
+
+# Mutations
+mutation CreateProduct {
+  createProduct(createProductInput: {
+    name: "Product 1",
+    price: 10.5
+  }) {
+    id
+    name
+    price
+  }
+}
+
+mutation UpdateProduct {
+  updateProduct(updateProductInput: {
+    id: "product-1",
+    name: "Updated Product 1",
+    price: 15.5
+  }) {
+    id
+    name
+    price
+  }
+}
+
+mutation RemoveProduct {
+  removeProduct(id: "product-1") {
+    id
+  }
+}
